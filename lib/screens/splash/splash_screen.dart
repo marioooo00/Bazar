@@ -2,18 +2,22 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'app_colors.dart';
-import 'onboarding_screen.dart';
+import 'package:task/core/constants/app_colors.dart';
+import 'package:task/screens/onboarding/onboarding_screen.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen
+    extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SplashScreen> createState() =>
+      _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
+class _SplashScreenState
+    extends State<SplashScreen>
+    with
+        SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> fadeAnimation;
   late Animation<double> scaleAnimation;
@@ -24,7 +28,9 @@ class _SplashScreenState extends State<SplashScreen>
 
     controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1200),
+      duration: const Duration(
+        milliseconds: 1200,
+      ),
     );
 
     fadeAnimation = CurvedAnimation(
@@ -32,31 +38,30 @@ class _SplashScreenState extends State<SplashScreen>
       curve: Curves.easeIn,
     );
 
-    scaleAnimation = Tween<double>(
-      begin: 0.8,
-      end: 1,
-    ).animate(
-      CurvedAnimation(
-        parent: controller,
-        curve: Curves.easeOutBack,
-      ),
-    );
+    scaleAnimation =
+        Tween<double>(
+          begin: 0.8,
+          end: 1,
+        ).animate(
+          CurvedAnimation(
+            parent: controller,
+            curve: Curves.easeOutBack,
+          ),
+        );
 
     controller.forward();
 
-    Timer(
-      const Duration(seconds: 2),
-      () {
-        if (!mounted) return;
+    Timer(const Duration(seconds: 2), () {
+      if (!mounted) return;
 
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const OnboardingScreen(),
-          ),
-        );
-      },
-    );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) =>
+              const OnboardingScreen(),
+        ),
+      );
+    });
   }
 
   @override
@@ -68,7 +73,8 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
+      backgroundColor:
+          AppColors.primary,
       body: Center(
         child: FadeTransition(
           opacity: fadeAnimation,
@@ -79,7 +85,8 @@ class _SplashScreenState extends State<SplashScreen>
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 38,
-                fontWeight: FontWeight.bold,
+                fontWeight:
+                    FontWeight.bold,
               ),
             ),
           ),
